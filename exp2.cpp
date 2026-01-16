@@ -1,46 +1,40 @@
-#include <iostream>
+#include<iostream>
+#include<iomanip>
 using namespace std;
-int main() 
-{
-    float paperLength, paperWidth;
-    float top, bottom, left, right;
-    int pointSize, doubleSpaced;
-    float usableWidth, usableLength;
-    int charsPerLine, lines;
+int main(){
+    
+    float machinecost,earningperyear,salvagecost,alternativeinvestmentRate;
+    int year = 1; 
+    int machineProfit,alternativeincome;
+    cout<<"Enter machine cost :";
+    cin>>machinecost;
+    
+    cout<<"Enter earning per year :";
+    cin>>earningperyear;
+    cout<<"Enter salvagecost :";
+    cin>>salvagecost;
+    cout<<"Enter Alternative Investment Rate (%):";
+    cin>>alternativeinvestmentRate;
 
-    cout << "Enter paper length (inches):" ;
-    cin >> paperLength;
+    machineProfit = machinecost;
+    alternativeincome = machinecost;
+    alternativeinvestmentRate /=100;
 
-    cout << "Enter paper width (inches): ";
-    cin >>paperWidth;
-
-    cout << "Enter top margin (inches): ";
-    cin >> top;
-    cout <<"Enter bottom margin (inches): ";
-    cin >> bottom;
-    cout <<"Enter left margin (inches): ";
-    cin >> left;
-    cout <<"Enter right margin (inches): ";
-    cin >> right;
-
-    cout <<"Enter point size: ";
-    cin >>pointSize;
-
-    cout <<"Is it double spaced? (1 = Yes, 0 = No): ";
-    cin >>doubleSpaced;
-
-    if (doubleSpaced)
+    while(year<=100)
     {
-        pointSize *= 2;
-    }
-    usableWidth = paperWidth - left - right;
-    usableLength = paperLength - top - bottom;
-
-    charsPerLine = (usableWidth * 72) / pointSize;
-    lines = (usableLength * 72) / pointSize;
-
-    cout << "\nCharacters per line: " << charsPerLine << endl;
-    cout << "\nNumber of lines: " << lines << endl;
-
-    return 0;
+            machineProfit = salvagecost+(earningperyear*year);
+            alternativeincome = alternativeincome * (1 + alternativeinvestmentRate);
+            if(machineProfit>alternativeincome)
+            {
+                cout<<"Years required = "<<year;
+                break;
+            }else
+            {
+                cout <<setw(40)<< "Year :" << year << "  " << machineProfit << "  ||  " << alternativeincome << endl;
+                
+            }
+            year++;
+    }   
+    
 }
+
