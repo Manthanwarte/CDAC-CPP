@@ -1,50 +1,98 @@
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
+struct Date {
+    int day;
+    int month;
+    int year;
+
+    void initDate() {
+        day = 1;
+        month = 1;
+        year = 2000;
+    }
+
+    void acceptDate() {
+        cout << "Enter day: ";
+        cin >> day;
+        cout << "Enter month: ";
+        cin >> month;
+        cout << "Enter year: ";
+        cin >> year;
+    }
+
+    void printDate() {
+        cout << "Date: " << (day < 10 ? "0" : "") << day << "/"
+             << (month < 10 ? "0" : "") << month << "/"
+             << year << endl;
+    }
+
+    bool isLeapYear() {
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    }
+};
+
+void printDateonconsole(struct Date *dt) {
+    if (dt != nullptr) {
+        cout << "Date: " << (dt->day < 10 ? "0" : "") << dt->day << "/"
+             << (dt->month < 10 ? "0" : "") << dt->month << "/"
+             << dt->year << endl;
+    }
+}
+
+void acceptDatefromConsole(struct Date *dt) {
+    if (dt != nullptr) {
+        cout << "Enter day: ";
+        cin >> dt->day;
+        cout << "Enter month: ";
+        cin >> dt->month;
+        cout << "Enter year: ";
+        cin >> dt->year;
+    }
+}
+
+bool isLeapyear(struct Date dt) {
+    return (dt.year % 4 == 0 && dt.year % 100 != 0) || (dt.year % 400 == 0);
+}
+
 int main() {
-    float buyprice, sellprice;
-    int quantity;
-    
+    Date myDate;
+    int choice;
 
-    cout << "Enter Buy Price: ";
-    cin >> buyprice;
+    do {
+        cout << "\n--- Date Menu ---\n";
+        cout << "1. Initialize Date\n";
+        cout << "2. Accept Date\n";
+        cout << "3. Print Date\n";
+        cout << "4. Check Leap Year\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    cout << "Enter Sell Price: ";
-    cin >> sellprice;
-
-    cout << "Enter Quantity: ";
-    cin >> quantity;
-
-    float sellamount = sellprice * quantity;
-    float buyamount = buyprice * quantity;
-    float turnover = sellamount + buyamount;
-
-    float brokerage = 0.0003 * buyamount + 0.0003 * sellamount;
-    float service_tax = 0.1036 * brokerage;
-    
-    float stt = 0.00025 * sellamount;
-    float stamp_duty = 0.00002 * turnover;
-    float regulatory_charges = 0.00004 * turnover;
-
-    float total_charges = brokerage + service_tax + stt + stamp_duty + regulatory_charges;
-    float gross_profit = sellamount - buyamount;
-    float net_profit = gross_profit - total_charges;
-
-  cout << "\n--------------------------------------------------------------------\n";
-    cout <<  "                   "  <<  "Share Trading Statement\n";
-    cout << "--------------------------------------------------------------------\n";
-    cout << fixed << setprecision(2);
-    cout << left << setw(60) << setfill('.')<< "Selling Price" << "Rs " << sellamount << endl;
-    cout << left << setw(60) << "Purchase Price" << "Rs " << buyprice << endl;
-    cout << left << setw(60) << "Total Brokerage" << "Rs " << brokerage << endl;
-    cout << left << setw(60) << "Security Transaction Tax" << "Rs " << stt << endl;
-    cout << left << setw(60) << "Stamp Duty" << "Rs " << stamp_duty << endl;
-    cout << left << setw(60) << "Regulatory Charges" << "Rs " << regulatory_charges << endl;
-    cout << left << setw(60) << "Total taxes" << "Rs " << total_charges << endl;
-    cout << "--------------------------------------------------------------------\n";
-    cout << left << setw(60) << "Profit" << "Rs " << net_profit << endl;
+        switch(choice) {
+            case 1:
+                myDate.initDate();
+                cout << "Date initialized.\n";
+                break;
+            case 2:
+                acceptDatefromConsole(&myDate);
+                break;
+            case 3:
+                printDateonconsole(&myDate);
+                break;
+            case 4:
+                if(isLeapyear(myDate))
+                    cout << myDate.year << " is a Leap Year.\n";
+                else
+                    cout << myDate.year << " is NOT a Leap Year.\n";
+                break;
+            case 5:
+                cout << "Exiting program.\n";
+                break;
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+    } while(choice != 5);
 
     return 0;
 }
-
