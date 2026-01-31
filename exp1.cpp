@@ -1,30 +1,22 @@
 #include<iostream>
 using namespace std;
+int gcd(int a , int b) {
+    while (true)
+    {
+        int rem = 0;
+        rem = a % b;
+        if(rem == 0) return b;
 
-typedef struct employee{
-    int empID;
-    char empName[20];
-    float empSalary;
-}emp_t;
-
-void acceptData(employee *emp){
-    cout << "Enter Employee ID : ";
-    cin >> emp->empID;
-    cout << "Enter Employee Name : ";
-    cin >> emp->empName;
-    cout << "Enter Employee Salary : ";
-    cin >> emp->empSalary;
-}
-void printData(employee *emp){
-    cout << "Employee ID : " << emp->empID << endl;
-    cout << "Employee Name : " << emp->empName << endl;
-    cout << "Employee Salary : " << emp->empSalary << endl;
-}
-int main(){
-    employee emp;
-
-    acceptData(&emp);
-    printData(&emp);
+        a = b;
+        b = rem;
+    }
     
-    
+}
+int main() {
+    int a, b;
+    cout<<"Enter first number : ";
+    cin>>a;
+    cout<<"Enter second number : ";
+    cin>>b;
+    cout<<"GCD of the number is : "<<gcd(a,b);
 }
