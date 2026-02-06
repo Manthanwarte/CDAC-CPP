@@ -1,29 +1,26 @@
 #include<iostream>
 using namespace std;
+bool checkPassword(string s) {
+    if(s.length() < 8) return false;
 
-void acceptInput(int *num1,int *num2,int *num3,int *num4)
-{
-    cout << "Enter Value of Num1 :";
-    cin >> *num1;
-    cout << "Enter Value of Num2 :";
-    cin >> *num2;
-    cout << "Enter Value of Num3 :";
-    cin >> *num3;
-    cout << "Enter Value of Num4 :";
-    cin >> *num4;
+    bool hasDigit = false;
+    bool upper = false;
+    bool lower = false;
+    bool special = false;
+
+    for(int i=0 ; i<s.length() ; i++) {
+        if(isupper(s[i])) upper = true;
+        else if(islower(s[i])) lower = true;
+        else if(isdigit(s[i])) hasDigit = true;
+        else special = true;
+    }
+    return hasDigit & upper & lower & special;
 }
-
-void Sum(int *num1,int *num2,int *num3,int *num4)
-{
-    int sum = *num1 + *num2 + *num3 + *num4;
-    cout << "The Sum of Four Numbers : " << sum;
-}
-
-int main()
-{
-    int num1, num2, num3, num4;
-    acceptInput(&num1, &num2, &num3, &num4);
-    Sum(&num1, &num2, &num3, &num4);
-
-    return 0;
+int main() {
+    
+    string pass;
+    cout<<"Enter password : ";
+    getline(cin,pass);
+    if(checkPassword(pass)) cout<<"Your password is strong";
+    else cout<<"Enter should have 8 character\nIt should have one uppercase and one lowercase\nThe password must contains one digit\nOne special character";
 }
