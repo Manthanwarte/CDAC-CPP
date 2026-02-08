@@ -1,75 +1,35 @@
 #include <iostream>
 using namespace std;
 
-struct Date {
-    int day;
-    int month;
-    int year;
+int countDuplicateElements(int arr[], int n) {
+    int count = 0;
 
-    void initDate() {
-        day = 1;
-        month = 1;
-        year = 2000;
-    }
+    for (int i = 1; i < n; i++) {
+        if (arr[i] == arr[i - 1]) {
+            count++;
 
-    void acceptDateFromConsole() {
-        cout << "Enter day: ";
-        cin >> day;
-        cout << "Enter month: ";
-        cin >> month;
-        cout << "Enter year: ";
-        cin >> year;
+            while (i < n && arr[i] == arr[i - 1]) {
+                i++;
+            }
+        }
     }
-
-    void printDateOnConsole() {
-        cout << "Date: " << (day < 10 ? "0" : "") << day << "/"
-             << (month < 10 ? "0" : "") << month << "/"
-             << year << endl;
-    }
-
-    bool isLeapYear() {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-    }
-};
+    return count;
+}
 
 int main() {
-    Date myDate;
-    int choice;
+    int n;
+    cout << "Enter the length of the array : ";
+    cin >> n;
 
-    do {
-        cout << "\n--- Date Menu ---\n";
-        cout << "1. Initialize Date\n";
-        cout << "2. Accept Date\n";
-        cout << "3. Print Date\n";
-        cout << "4. Check Leap Year\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    int* arr = new int[n];
+    cout << "Enter elements in sorted order:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
 
-        switch(choice) {
-            case 1:
-                myDate.initDate();
-                cout << "Date initialized.\n";
-                break;
-            case 2:
-                myDate.acceptDateFromConsole();
-                break;
-            case 3:
-                myDate.printDateOnConsole();
-                break;
-            case 4:
-                if(myDate.isLeapYear())
-                    cout << myDate.year << " is a Leap Year.\n";
-                else
-                    cout << myDate.year << " is NOT a Leap Year.\n";
-                break;
-            case 5:
-                cout << "Exiting program.\n";
-                break;
-            default:
-                cout << "Invalid choice Try again.\n";
-        }
-    } while(choice != 5);
+    cout << "Count of duplicate elements in the array is : "
+         << countDuplicateElements(arr, n) << endl;
 
+    delete[] arr;
     return 0;
 }
