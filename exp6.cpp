@@ -1,26 +1,27 @@
 #include<iostream>
 using namespace std;
-bool checkPassword(string s) {
-    if(s.length() < 8) return false;
 
-    bool hasDigit = false;
-    bool upper = false;
-    bool lower = false;
-    bool special = false;
-
-    for(int i=0 ; i<s.length() ; i++) {
-        if(isupper(s[i])) upper = true;
-        else if(islower(s[i])) lower = true;
-        else if(isdigit(s[i])) hasDigit = true;
-        else special = true;
+class math_operation {
+public:
+    int max(int a, int b) {
+        return (a > b) ? a : b;
     }
-    return hasDigit & upper & lower & special;
-}
-int main() {
     
-    string pass;
-    cout<<"Enter password : ";
-    getline(cin,pass);
-    if(checkPassword(pass)) cout<<"Your password is strong";
-    else cout<<"Enter should have 8 character\nIt should have one uppercase and one lowercase\nThe password must contains one digit\nOne special character";
+    int max(int a, int b, int c) {
+        return max(max(a, b), c);
+    }
+    
+    int max(int a, int b, int c, int d) {
+        return max(max(a, b, c), d);
+    }
+};
+
+int main() {
+    math_operation math;
+    
+    cout << "Max of (12, 21) is " << math.max(12, 21) << endl;
+    cout << "Max of (5, 3, 8) is " << math.max(5, 3, 8) << endl;
+    cout << "Max of (12, 7, 21, 1) is " << math.max(12, 7, 21, 1) << endl;
+    
+    return 0;
 }
