@@ -1,117 +1,61 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class Date {
+class Cylinder {
 private:
-    int day;
-    int month;
-    int year;
+    int radius;
+    int height;
+    const double pi;
 
 public:
-    Date() {
-        day = 1;
-        month = 1;
-        year = 2000;
+    Cylinder() : pi(3.14) {
+        radius = 0;
+        height = 0;
     }
 
-    Date(int d, int m, int y) {
-        day = d;
-        month = m;
-        year = y;
+    Cylinder(int r, int h) : pi(3.14) {
+        radius = r;
+        height = h;
     }
 
-    ~Date() {
-        
+    int getRadius() const {
+        return radius;
     }
 
-    void setDay(int d) {
-        day = d;
+    void setRadius(int r) {
+        radius = r;
     }
 
-    void setMonth(int m) {
-        month = m;
+    int getHeight() const {
+        return height;
     }
 
-    void setYear(int y) {
-        year = y;
+    void setHeight(int h) {
+        height = h;
     }
 
-    int getDay() const {
-        return day;
-    }
-
-    int getMonth() const {
-        return month;
-    }
-
-    int getYear() const {
-        return year;
-    }
-
-    void initDate() {
-        day = 1;
-        month = 1;
-        year = 2000;
-    }
-
-    void acceptDateFromConsole() {
-        cout << "Enter day: ";
-        cin >> day;
-        cout << "Enter month: ";
-        cin >> month;
-        cout << "Enter year: ";
-        cin >> year;
-    }
-
-    void printDateOnConsole() {
-        cout << "Date: " << (day < 10 ? "0" : "") << day << "/"
-             << (month < 10 ? "0" : "") << month << "/"
-             << year << endl;
-    }
-
-    bool isLeapYear() {
-        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+    double calculateVolume() const {
+        return pi * radius * radius * height;
     }
 };
 
 int main() {
-    Date myDate;
-    int choice;
-
-    do {
-        cout << "\n--- Date Menu ---\n";
-        cout << "1. Initialize Date\n";
-        cout << "2. Accept Date\n";
-        cout << "3. Print Date\n";
-        cout << "4. Check Leap Year\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch(choice) {
-            case 1:
-                myDate.initDate();
-                cout << "Date initialized.\n";
-                break;
-            case 2:
-                myDate.acceptDateFromConsole();
-                break;
-            case 3:
-                myDate.printDateOnConsole();
-                break;
-            case 4:
-                if(myDate.isLeapYear())
-                    cout << myDate.getYear() << " is a Leap Year.\n";
-                else
-                    cout << myDate.getYear() << " is NOT a Leap Year.\n";
-                break;
-            case 5:
-                cout << "Exiting program.\n";
-                break;
-            default:
-                cout << "Invalid choice Try again.\n";
-        }
-    } while(choice != 5);
+    int r, h;
+    
+    cout << "Enter radius of cylinder : ";
+    cin >> r;
+    
+    cout << "Enter height of cylinder : ";
+    cin >> h;
+    
+    Cylinder c1(r, h);
+    
+    cout << endl;
+    cout << "Cylinder Details" << endl;
+    cout << "Radius: " << c1.getRadius() << endl;
+    cout << "Height: " << c1.getHeight() << endl;
+    cout << "Volume: " << c1.calculateVolume() << endl;
 
     return 0;
 }
+
