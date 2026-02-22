@@ -1,48 +1,57 @@
 #include<iostream>
+#include<string>
 using namespace std;
 
-int addition(int a, int b) {
-    return a + b;
-}
-
-float addition(float a, float b) {
-    return a + b;
-}
-
-int addition(int a, int b, int c) {
-    return a + b + c;
-}
-
-float addition(float a, float b, float c) {
-    return a + b + c;
-}
-
-float addition(float a) {
-    return a;
-}
-
-int addition(int a, int b, int c, int d, int e) {
-    return a + b + c + d + e;
-}
-
-float addition(float a, float b, float c, float d) {
-    return a + b + c + d;
-}
-
-float addition(char a, float b, float c, float d) {
-    return static_cast<float>(a) + b + c + d;
-}
+class Employee{
+    private:
+        int emp_id;
+        string emp_name;
+        float empsal;
+        mutable float bonus_result;
+    
+    public:
+        Employee(int id, string name, float sal) : emp_id(id), emp_name(name), empsal(sal), bonus_result(0.0) {}
+        
+        void displayOutput() const {
+            cout << "        EMPLOYEE DETAILS" << endl;
+            cout << "Employee ID    : " << emp_id << endl;
+            cout << "Employee Name  : " << emp_name << endl;
+            cout << "Employee Salary: ₹ " << empsal << endl;
+        }
+        
+        void updateSalary(float new_sal) {
+            empsal = new_sal;
+        }
+        
+        float getBonus() const {
+            bonus_result = empsal * 0.1;
+            return bonus_result;
+        }
+};
 
 int main() {
-    cout << "2 ints: " << addition(5, 3) << endl;
-    cout << "2 floats: " << addition(4.2f, 1.8f) << endl;
-    cout << "3 ints: " << addition(1, 2, 3) << endl;
-    cout << "3 floats: " << addition(1.1f, 2.2f, 3.3f) << endl;
-    cout << "1 float: " << addition(7.5f) << endl;
-    cout << "1 int + 4 ints: " << addition(1, 2, 3, 4, 5) << endl;
-    cout << "4 floats: " << addition(1.1f, 2.2f, 3.3f, 4.4f) << endl;
-    cout << "1 char + 3 floats: " 
-         << addition('A', 1.1f, 2.2f, 3.3f)<< endl;
-
+    int id;
+    string name;
+    float salary;
+    
+    cout << "Enter Employee Details:" << endl;
+    
+    cout << "Employee ID: ";
+    cin >> id;
+    
+    cout << "Employee Name: ";
+    cin >> name;
+    
+    cout << "Employee Salary: ₹";
+    cin >> salary;
+    
+    const Employee emp(id, name, salary);
+    
+    emp.displayOutput();
+    
+    float bonus = emp.getBonus();
+    cout << "Calculated Bonus: ₹" << bonus << endl;
+    cout << "\n";
+    
     return 0;
 }
